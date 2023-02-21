@@ -1,11 +1,29 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Homepage{% endblock %}
+{% block title %}Main | RentUAV{% endblock %}
 
 {% block content %}
 
-    <p>You made it!</p>
-    <img src="{% static 'images/uav_background.jpeg' %}" alt="My image">
+    <!-- <img src="{% static 'images/uav_background.jpeg' %}" alt="My image"> -->
+
+    <div class="text-center text-5xl mb-5" style="font-family: 'Merriweather Sans', sans-serif;">
+        <h2>Welcome to RentAnUAV</h2>
+    </div>
+
+    <div class="text-center text-base mb-5" style="font-family: 'Libre Franklin', sans-serif;">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor expedita accusamus sint sit vero eveniet quisquam assumenda necessitatibus reprehenderit vitae cupiditate quis voluptatibus quae sed ab ipsum laboriosam, deserunt facilis.</p>
+    </div>
+
+    <div class="flex flex-row justify-center gap-x-8">
+
+        {% include 'partials/authButtons.html' %}
+
+    </div> 
+
+    <a type="button" href="{% url 'listUavs' %}">
+        List UAVS 
+    </a>
+
 
 {% endblock %}

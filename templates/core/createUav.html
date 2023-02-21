@@ -1,0 +1,211 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Add New UAV | RentUAV{% endblock %}
+
+{% block navbar %}
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+            </ul>
+            <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        </div>
+    </nav>
+
+{% endblock %}
+
+{% block content %}
+
+    
+    <a href="{% url 'logout' %}">Log Out</a>
+ 
+    <tr>
+        <th><label for="id_name">Name:</label></th>
+        <td>
+          
+          <input type="text" name="name" maxlength="20" required id="id_name">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_weight">Weight:</label></th>
+        <td>
+          
+          <input type="number" name="weight" step="any" required id="id_weight">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_user">User:</label></th>
+        <td>
+          
+          <select name="user" id="id_user">
+      <option value="1" selected>nil</option>
+    
+    </select>
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_brand">Brand:</label></th>
+        <td>
+          
+          <select name="brand" required id="id_brand">
+      <option value="" selected>---------</option>
+    
+      <option value="1">Brand object (1)</option>
+    
+    </select>
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_brandModel">BrandModel:</label></th>
+        <td>
+          
+          <select name="brandModel" required id="id_brandModel">
+      <option value="" selected>---------</option>
+    
+      <option value="1">BrandModel object (1)</option>
+    
+    </select>
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_category">Category:</label></th>
+        <td>
+          
+          <select name="category" required id="id_category">
+      <option value="" selected>---------</option>
+    
+      <option value="1">Category object (1)</option>
+    
+      <option value="2">Category object (2)</option>
+    
+      <option value="3">Category object (3)</option>
+    
+      <option value="4">Category object (4)</option>
+    
+    </select>
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_flightHours">FlightHours:</label></th>
+        <td>
+          
+          <input type="number" name="flightHours" step="any" required id="id_flightHours">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_payload">Payload:</label></th>
+        <td>
+          
+          <input type="number" name="payload" step="any" required id="id_payload">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_wingspan">Wingspan:</label></th>
+        <td>
+          
+          <input type="number" name="wingspan" step="any" required id="id_wingspan">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_maxSpeed">MaxSpeed:</label></th>
+        <td>
+          
+          <input type="number" name="maxSpeed" step="any" required id="id_maxSpeed">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_length">Length:</label></th>
+        <td>
+          
+          <input type="number" name="length" step="any" required id="id_length">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_endurance">Endurance:</label></th>
+        <td>
+          
+          <input type="number" name="endurance" step="any" required id="id_endurance">
+          
+          
+        </td>
+      </tr>
+    
+      <tr>
+        <th><label for="id_additionalNotes">AdditionalNotes:</label></th>
+        <td>
+          
+          <textarea name="additionalNotes" cols="40" rows="10" maxlength="200" required id="id_additionalNotes">
+    </textarea>
+          
+          
+            
+          
+        </td>
+      </tr>
+    
+    
+
+{% endblock %}

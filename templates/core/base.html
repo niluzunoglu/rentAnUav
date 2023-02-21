@@ -1,19 +1,49 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
+
+    <!-- Tailwind CDN Links -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap CDN Links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
+    <!-- Google Font Links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin&family=Merriweather+Sans&family=Taviraj:wght@200&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-    <div class="bg-[url('/images/uav_background.jpeg')]">
-        {% block content %}
+    <div class="bg-cover w-screen h-screen"  style="background-image: url('static/images/uav_background.jpeg');"> 
 
-        {% endblock %}
+        <div class="flex flex-col p-8">
+
+            <div class="m-8">
+                <h3>{% block navbar %} {% endblock %}</h3>
+            </div>
+
+
+            <div class="m-16">        
+                {% block content %}
+
+                {% endblock %}
+            </div>
+
+
+            <div class="m-8">
+                <h3>Footer</h3>
+            </div>
+        </div> 
     </div>
-
 </body>
 </html>
