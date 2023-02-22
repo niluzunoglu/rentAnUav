@@ -1,0 +1,35 @@
+<div class="mb-6 justify-center">
+
+    <label for="default-input" class="block mb-2 text-xl text-black font-medium text-gray-900">{{fieldLabel}}</label>
+
+    {% if fieldLabel == 'Category Name' %}
+
+        <input type="text" id="default-input" name="categoryName" max_length=40 class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+    {% elif fieldLabel == 'Brand Name' %}
+
+        <input type="text" id="default-input" name="brandName" max_length=40 class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+    {% elif fieldLabel == 'Model Name' %}  
+
+        {% with valueVal=1 %}{% endwith %}
+
+        <input type="text" id="default-input" name="modelName" max_length=50 class="bg-slate-300 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+        <label for="default-input" class="block mb-2 text-xl text-black font-medium text-gray-900">Select Brand</label>
+
+        <select name="brand" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            
+            {% for brandName in brandModelForm.brand %}
+
+                <option value="{{valueVal}}">{{brandName}}</option>
+
+                {{ valueVal|add:"1"}}
+
+            {% endfor %}
+
+        </select>
+
+    {% endif %}
+
+</div> 

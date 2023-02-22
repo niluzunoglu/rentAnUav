@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
 
+    <link rel="icon" href="{% static 'images/uavLogo.png' %}">
+
+    <!-- Style.css File Link -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <!-- Tailwind CDN Links -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -24,25 +29,23 @@
 </head>
 <body>
 
-    <div class="bg-cover w-screen h-screen"  style="background-image: url('static/images/uav_background.jpeg');"> 
+    <div> 
 
-        <div class="flex flex-col p-8">
+        <div class="flex flex-col p-3">
 
-            <div class="m-8">
-                <h3>{% block navbar %} {% endblock %}</h3>
+            <div class="mb-2">
+                {% block navbar %} 
+                    
+                {% endblock %}
             </div>
 
 
-            <div class="m-16">        
+            <div class="m-4">        
                 {% block content %}
 
                 {% endblock %}
             </div>
 
-
-            <div class="m-8">
-                <h3>Footer</h3>
-            </div>
         </div> 
     </div>
 </body>

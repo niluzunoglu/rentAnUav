@@ -4,12 +4,21 @@ from django.contrib.auth.models import User
 class Brand(models.Model):
     brandName = models.CharField(null=False,max_length=40)
     
+    def __str__(self):
+        return self.brandName
+
 class BrandModel(models.Model):
     brand = models.ForeignKey(Brand,on_delete=models.CASCADE)
     modelName = models.CharField(null=False,max_length=50)
     
+    def __str__(self):
+        return self.modelName + " (" + self.brand.brandName + ")"
+    
 class Category(models.Model):
     categoryName = models.CharField(max_length=40)
+    
+    def __str__(self):
+        return self.categoryName
 
 class UAV(models.Model):
     
@@ -31,7 +40,11 @@ class UAV(models.Model):
     endurance = models.FloatField(null=True)
     
     additionalNotes = models.TextField(max_length=200,null=True)
+    isRented = models.BooleanField(null=False,default=True)
     
     class Meta:
         db_table = "uav"
+        
+    def __str__(self):
+        return str(self.id) + " - " + self.name
     

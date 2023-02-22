@@ -1,0 +1,7 @@
+body, html{
+    background: linear-gradient(steelblue,rgb(241, 182, 191));
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    height: 100%;
+}

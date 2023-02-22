@@ -1,24 +1,68 @@
-{% extends 'main/base.html' %}
+{% extends 'core/base.html' %}
 {% load static %}
 {% load socialaccount %}
 
-{% block title %}Log In{% endblock %} 
+{% block title %}Log In | RentUAV {% endblock %} 
 
 {% block content %}
 
-<div class="login_card"> 
+<div style="font-family: 'Merriweather Sans', sans-serif;" class="box-border h-60 w-65"> 
     
-    <h2>Log In</h2>
-    <form method="post">
+    <div class="flex flex-row justify-center">
+        <img src="{% static 'images/uavLogo.png' %}" alt="uavLogo" width="10%" length="10%">
+    </div>
+
+    <h2 class="text-center text-4xl tracking-wide">Log In</h2>
+
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-4" method="post">
+
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Log In</button>
+
+        <div class="md:flex md:items-center mb-6"> 
+
+            <div class="md:w-1/6">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="id_username">Username</label>
+            </div>
+
+            <div class="md:w-5/6">
+                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+            </div>
+            
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+
+            <div class="md:w-1/6">
+                <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="id_password">Password</label>
+            </div>
+
+            <div class="md:w-5/6">
+                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="password" name="password" autocomplete="current-password" required id="id_password">
+            </div>
+
+        </div>
+
+
+        <div class="flex flex-row justify-center">
+            <button type="submit">Log In</button>
+        </div>
+
     </form>
 
-    <a href="{% provider_login_url 'google' %}">Login with Google</a>
-    <a href="{% provider_login_url 'github' %}">Login with Github</a>
+    <div class="mb-3 text-center">
+        <a href="{% provider_login_url 'google' %}">Login with Google</a>
+    </div>
 
-    <a href="{% url 'password_reset' %}">Forget Password?</a>
+    <div class="mb-8 text-center">
+        <a href="{% url 'password_reset' %}">Forget Password?</a>
+    </div>
+
+    <div class="mb-8 text-center"> 
+        Don't have an account? <a href="{% url 'signUp' %}"> <b>Sign up</b> </a>instead.
+    </div>
+
+
+
 </div>
 
 {% endblock %}

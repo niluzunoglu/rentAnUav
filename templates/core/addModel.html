@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load slippers %}
+
+{% block title %}New Model | RentUAV{% endblock %}
+
+{% block navbar %} {% #header %} {% /header %} {% endblock %}
+
+{% block content %}
+
+    <div style="font-family: 'Taviraj', serif" class="box-border h-70 w-75 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-4 justify-center"> 
+ 
+        <div class="text-5xl text-center" >
+            <h2> Add New UAV Model </h2>
+        </div>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {% #inputField fieldLabel="Model Name" brandModelForm=brandModelForm %}{% /inputField %}
+ 
+            <input type="submit" class="button bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" value="Add">
+        
+        </form>
+
+    </div>
+    
+
+{% endblock %} 

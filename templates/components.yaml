@@ -1,0 +1,7 @@
+components:
+  button: "partials/button.html"
+  card: "partials/card.html"
+  alert: "partials/alert.html"
+  header: "partials/header.html"
+  formBackground: "partials/formBackground.html"
+  inputField: "partials/inputField.html"

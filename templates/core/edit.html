@@ -2,17 +2,22 @@
 {% load static %}
 {% load slippers %}
 
-{% block title %}Add New UAV | RentUAV{% endblock %}
+{% block title %}Edit UAV Info | RentUAV{% endblock %}
 
 {% block navbar %} {% #header %} {% /header %} {% endblock %}
 
 {% block content %}
 
-    <form method="post">
+    <h2> Update {{uav.name}} Info </h2>
+
+    <br>
+    <form method="post" action="">
         {% csrf_token %}
         {{ uavForm.as_p }}
-        <input type="submit" value="Save Info">
+        <input type="submit" value="Update Info">
     </form>
     
-    
-{% endblock %}
+
+{% endblock %} 
+
+
