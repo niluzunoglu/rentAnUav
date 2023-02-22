@@ -5,3 +5,4 @@ components:
   header: "partials/header.html"
   formBackground: "partials/formBackground.html"
   inputField: "partials/inputField.html"
+  searchField: "partials/searchField.html"

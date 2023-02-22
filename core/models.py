@@ -48,3 +48,8 @@ class UAV(models.Model):
     def __str__(self):
         return str(self.id) + " - " + self.name
     
+class RentOperations(models.Model):
+    
+    uav = models.ForeignKey(UAV,on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=User.objects.first().pk)

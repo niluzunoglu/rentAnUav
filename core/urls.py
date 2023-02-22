@@ -14,7 +14,9 @@ urlpatterns = [
     path('addBrandModel',views.addModel,name="addBrandModel"),
     path('addBrand',views.addBrand,name="addBrand"),
     
-    path('search',views.search,name="search")
+    path('search',views.search,name="search"),
+    path('rent/<id>',views.rent,name="rent"),
+    path('details/<id>',views.details,name="details")
 
 
 ]

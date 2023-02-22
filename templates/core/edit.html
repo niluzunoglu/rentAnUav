@@ -8,15 +8,20 @@
 
 {% block content %}
 
-    <h2> Update {{uav.name}} Info </h2>
+    <div class="justify-center" style="font-family: 'Libre Franklin', sans-serif;"> 
+        <h2 class="mb-3 text-2xl text-center"> Update {{uav.name}} Info </h2>
 
-    <br>
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ uavForm.as_p }}
-        <input type="submit" value="Update Info">
-    </form>
-    
+        <form method="post">
+
+            {% csrf_token %}
+            
+            <table class="table border-separate border-spacing-2 border border-slate-500"> 
+                {{ uavForm.as_table }}
+            </table>
+
+            <input type="submit" class="justify-center bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-full" value="Update Info">
+        </form>
+    </div>
 
 {% endblock %} 
 

@@ -1,14 +1,18 @@
 
 <div class="flex flex-row max-w-sm rounded overflow-hidden shadow-lg m-8">
 
-  <div class="px-6 py-4">
+  <div class="px-6 py-4" style="font-family: 'Merriweather Sans', sans-serif;">
     <div class="font-bold text-xl mb-2">{{name}}</div>
-    <p class="text-gray-700 text-base">
+
+    <p class="text-gray-700 text-base mb-2">
       {{brandModel}}
     </p>
 
-    <a>Click for detailed info</a>
-    <button>Rent</button>
+    <p class="flex flex-row">
+      <svg class="h-6 w-6 text-black"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+      </svg> {{category}}
+    </p>
 
       {{children}}
 

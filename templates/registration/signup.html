@@ -5,7 +5,7 @@
 
 {% block content %}
 
-  <div style="font-family: 'Merriweather Sans', sans-serif;"> 
+  <div style="font-family: 'Libre Franklin', sans-serif;"> 
       
     <div class="flex flex-row justify-center">
         <img src="{% static 'images/uavLogo.png' %}" alt="uavLogo" width="10%" length="10%">
@@ -16,10 +16,44 @@
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-2 mt-4" method="post">
  
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign Up</button>
+        
+            <div class="p-2 mb-2"> 
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" maxlength="150" autofocus required id="id_username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                
+                <span class="text-sm">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+            </div>
 
-        <p class="text-center">If you already have an account, <a href="/user_accounts/login">login</a> instead.</p>
+            <div class="p-2 mb-2">
+                <label for="id_email">Email address:</label>
+                <input type="email" name="email" maxlength="254" id="id_email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </div>
+
+            <div class="p-2 mb-2"> 
+                <label for="id_password1">Password:</label>
+                <input type="password" name="password1" autocomplete="new-password" required id="id_password1"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <span class="text-sm">
+                    <ul>
+                        <li>Your password can’t be too similar to your other personal information.</li>
+                        <li>Your password must contain at least 8 characters.</li>
+                        <li>Your password can’t be a commonly used password.</li>
+                        <li>Your password can’t be entirely numeric.</li>
+                    </ul>
+                </span>
+            
+            </div>
+
+           <div class="p-2 mb-2">
+
+                <label for="id_password2">Password confirmation:</label>
+                <input type="password" name="password2" autocomplete="new-password" required id="id_password2"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                
+                <span class="text-sm">Enter the same password as before, for verification.</span>
+           </div>
+            
+        <button type="submit" href="{% url 'signUp' %}" class="justify-center bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-full">Sign Up</button>
+
+        <p class="text-center">If you already have an account, <a href="/user_accounts/login" class="font-bold">login</a> instead.</p>
 
     </form>
 

@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load slippers %}
+
+{% block title %} {{uav.name}} | RentUAV{% endblock %}
+
+{% block navbar %} {% #header %} {% /header %} {% endblock %}
+
+{% block content %}
+
+    {% include 'partials/alert.html' %}   
+
+    
+    <div class="flex flex-column justify-center box-border h-70 w-75 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-4 justify-center">
+
+        <div class="text-4xl text-center mb-3" style="font-family: 'Taviraj', serif">
+            <p> {{uav.name}} </p>
+        </div>
+
+        <div class="text-2xl text-center mb-4" style="font-family: 'Libre Franklin', sans-serif;">
+            <p>{{uav.brandModel}}</p>
+        </div>
+
+        <div class="text-center text-xl"> 
+            {% if uav.isRented %}
+                <h2>Not available for rent</h2>
+            {% else %}
+                <h2>Available for rent</h2>
+            {% endif %}
+        </div>
+        <div class="columns-2 justify-center" style="font-family: 'Libre Franklin', sans-serif;"> 
+            <div class="text-xl text-center pl-5 mb-2">
+                <p>Flight Hours: {{uav.flightHours}}</p>
+                <p>Wingspan: {{uav.wingspan}}</p>
+                <p>Max Speed: {{uav.maxSpeed}}</p>
+            </div>
+
+            <div class="text-xl text-center pl-5 mb-2">
+                <p>Payload: {{uav.payload}}</p>
+                <p>Length: {{uav.length}}</p>
+                <p>Endurance: {{uav.endurance}}</p>
+            </div>
+        </div> 
+
+        <div class="text-xl text-center" style="font-family: 'Libre Franklin', sans-serif;">
+            <p>
+                Additional Notes: {{uav.additionalNotes}}
+            </p>
+        </div>
+
+        <div class="columns-2 justify-center">
+            <div class="text-center">
+                <a type="button" href="{% url 'updateUav' uav.id %}"><span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xl font-semibold text-gray-700 mr-2 mb-2">Update</span></a>
+            </div>
+            <div class="text-center">
+                <a type="button" href="{% url 'deleteUav' uav.id %}"><span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-xl font-semibold text-gray-700 mr-2 mb-2">Delete</span></a>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

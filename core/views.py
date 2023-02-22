@@ -4,6 +4,7 @@ from core.models import UAV
 from core.forms import *
 from django.contrib import messages
 from django.contrib.auth import login
+from django.db.models import Q 
 
 def sign_up(request):
     
@@ -29,18 +30,12 @@ def sign_up(request):
             return redirect('/list')
         
         else:
+            messages.error(request,"Form is not valid.")
             return render(request, 'registration/signup.html', {'form': form})
 
 def homePage(request):
     
     if request.user.is_authenticated:
-        
-        messages.debug(request, 'SQL statements were executed.')
-        messages.info(request, 'Three credits remain in your account.')
-        messages.success(request, 'Profile details updated.')
-        messages.warning(request, 'Your account expires in three days.')
-        messages.error(request, 'Document deleted.') 
-
         return redirect('listUavs')
     
     else:
@@ -58,12 +53,6 @@ def listAvailableUavs(request):
     uavList = UAV.objects.filter(isRented=False).all()
     return render(request,"core/listAvailableUavs.html",{"uavList":uavList,"rentedFlag":rentedFlag})
 
-def editUav(request,uavId):
-    
-    uav = UAV.objects.get(id=uavId)
-    uavForm = UAVForm()
-    return render(request,"core/edit.html",{"uav":uav, "uavForm":uavForm})
-    
 def updateUav(request,uavId):
     
     if request.method == "POST":
@@ -73,7 +62,11 @@ def updateUav(request,uavId):
           
         if form.is_valid():  
             form.save()  
+            messages.success(request,'Info updated successfully')
             return redirect("/list")  
+        else:
+            messages.error(request,"Form is not valid. Try again")
+            return redirect("/list")
         
     else:
         uav = UAV.objects.get(id=uavId)
@@ -86,6 +79,7 @@ def createUav(request):
          
         form = UAVForm(request.POST)  
         if form.is_valid():  
+            
             try:  
                 form.save()  
                 return redirect('/list')  
@@ -102,11 +96,13 @@ def deleteUav(request,uavId):
     
     try:
         deleted_item = UAV.objects.get(id=uavId).delete()
+        messages.success(request,"UAV deleted successfully")
         return redirect('/list')
         
-    except:
-        return render(request,"core/error.html",{"error":"ERROR EXCEPT İN DELETE UAV"})
-
+    except Exception as e :
+        messages.error(request,e)
+        return redirect('/list')
+        
 def addCategory(request):
     
     if request.method == "POST":
@@ -190,10 +186,46 @@ def search(request):
         
         search = request.POST["searchText"]
         
-        result = UAV.objects.filter(
-            Q(name__contains=search) | Q(brand__contains=search) | Q(brandModel__contains=search) | Q(category__contains=search)
-        )
-        
+        result = UAV.objects.filter(Q(name__icontains=search) | Q(brand__brandName__icontains=search) | Q(brandModel__modelName__icontains=search) | Q(category__categoryName__icontains=search)).all()
         print(search)
-        return render(request,"core/listUavs.html",{"uavList":result})
+        print(result)
         
+        if list(result) == []:
+            messages.error(request, 'UAV not found') 
+            return redirect('/list')
+
+        messages.success(request,"Search results fetched")
+        return render(request,"core/listUavs.html",{"uavList":result})
+    
+    else:
+        return redirect('/list')
+        
+def rent(request,id):
+    
+    uavObject = UAV.objects.get(id=id)
+    user = User.objects.get(id=1)
+    
+    if(uavObject.isRented == False):
+        
+        operation = RentOperations(uav=uavObject,user=user)
+        
+        uavObject.isRented = True
+        uavObject.save()
+        
+        messages.success(request,'Rented successfully')
+        return redirect('/list')
+    
+    else:
+        messages.error(request,'This UAV has rented already. Try again with another.')
+        return redirect('/list')        
+    
+def details(request,id):
+    
+    try:
+        uav=UAV.objects.get(id=id)
+        
+    except Exception as e:
+        messages.error(request,e)
+        return redirect('/list')
+    
+    return render(request,"core/detailedInfoPage.html",{"uav":uav})
