@@ -7,11 +7,6 @@ from django.contrib.auth import login
 from django.db.models import Q 
 
 def sign_up(request):
-    
-    if request.method == 'GET':
-        
-        form = RegisterForm()
-        return render(request, 'registration/signup.html', {'form': form})    
    
     if request.method == 'POST':
         
@@ -32,6 +27,9 @@ def sign_up(request):
         else:
             messages.error(request,"Form is not valid.")
             return render(request, 'registration/signup.html', {'form': form})
+        
+    form = RegisterForm()
+    return render(request, 'registration/signup.html', {'form': form})    
 
 def homePage(request):
     
@@ -61,9 +59,15 @@ def updateUav(request,uavId):
         form = UAVForm(request.POST, instance = uav)
           
         if form.is_valid():  
-            form.save()  
-            messages.success(request,'Info updated successfully')
-            return redirect("/list")  
+            
+            try:
+                form.save()  
+                messages.success(request,'Info updated successfully')
+                return redirect('/list')  
+
+            except Exception as e:
+                messages.error(request,e)
+                return redirect('/list')
         else:
             messages.error(request,"Form is not valid. Try again")
             return redirect("/list")
@@ -78,16 +82,21 @@ def createUav(request):
     if request.method == "POST":
          
         form = UAVForm(request.POST)  
+        
         if form.is_valid():  
-            
+                
             try:  
                 form.save()  
+                messages.success(request,"UAV created successfully.")
                 return redirect('/list')  
-            except:  
-                pass   
-            
-            return render(request,"core/error.html",{"error":"CREATE UAV "})
-
+            except Exception as e:  
+                messages.error(request,e)
+                return redirect('/list')
+        
+        else:
+            messages.error(request,"Form is not valid. Try again")
+            return redirect("/list")
+        
     else:
         uavForm = UAVForm()
         return render(request,"core/createUav.html",{"uavForm":uavForm})
@@ -202,24 +211,28 @@ def search(request):
         
 def rent(request,id):
     
-    uavObject = UAV.objects.get(id=id)
-    user = User.objects.get(id=1)
-    
-    if(uavObject.isRented == False):
+    if request.user.is_authenticated:
         
-        operation = RentOperations(uav=uavObject,user=user)
-        
-        uavObject.isRented = True
-        uavObject.save()
-        
-        messages.success(request,'Rented successfully')
-        return redirect('/list')
+        user = User.objects.get(username = request.user.username)
     
-    else:
-        messages.error(request,'This UAV has rented already. Try again with another.')
-        return redirect('/list')        
+        uavObject = UAV.objects.get(id=id)
+        
+        if uavObject.isRented == False:
+            
+            operation = RentOperations(uav=uavObject,user=user)
+            
+            uavObject.isRented = True
+            uavObject.save()
+            
+            messages.success(request,'UAV rented successfully')
+            return redirect('/list')
+        
+        else:
+            messages.error(request,'This UAV has rented already. Try again with another.')
+            return redirect('/list')        
     
-def details(request,id):
+        
+def detail(request,id):
     
     try:
         uav=UAV.objects.get(id=id)
