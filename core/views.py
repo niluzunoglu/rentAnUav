@@ -82,7 +82,6 @@ def createUav(request):
     if request.method == "POST":
          
         form = UAVForm(request.POST)  
-        
         if form.is_valid():  
                 
             try:  
@@ -232,7 +231,7 @@ def rent(request,id):
             return redirect('/list')        
     
         
-def detail(request,id):
+def details(request,id):
     
     try:
         uav=UAV.objects.get(id=id)
